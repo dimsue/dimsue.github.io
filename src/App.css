@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Caudex', serif;
+  font-weight: 600;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#overlay {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position:fixed;
+  z-index: 1000;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  margin-bottom: 2rem;
+}
+
+.item-inspect {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#item-holder {
+  width: 60%;
+  height: 600px;
+  background: transparent;
+  border: 1px solid black;
+  margin-bottom: 1rem;
+}
+
+#canvas-item, #canvas-game {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+}
+
+#canvas-item {
+  background-color: lightcyan;
+  opacity: 1;
+}
