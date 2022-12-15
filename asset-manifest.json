@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "'https://dimsue.github.io/stari-grad-tour /static/css/main.b79bd525.css",
+    "main.js": "'https://dimsue.github.io/stari-grad-tour /static/js/main.05ae094c.js",
+    "index.html": "'https://dimsue.github.io/stari-grad-tour /index.html",
+    "main.b79bd525.css.map": "'https://dimsue.github.io/stari-grad-tour /static/css/main.b79bd525.css.map",
+    "main.05ae094c.js.map": "'https://dimsue.github.io/stari-grad-tour /static/js/main.05ae094c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b79bd525.css",
+    "static/js/main.05ae094c.js"
+  ]
+}
