@@ -1,6 +1,6 @@
 import React from "react";
 import { useGLTF } from "@react-three/drei";
-import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import { RigidBody } from "@react-three/rapier";
 
 export function Tower(props) {
   const { nodes, materials } = useGLTF("/tower/Kula1.glb");
@@ -10,7 +10,7 @@ export function Tower(props) {
       colliders="cuboid"
       enabledRotations={[false, false, false]}
       type="fixed"
-      position={[-32, 30.1, 30]}
+      position={[-32, 30.1, 29]}
       rotation={[0, Math.PI / 2.2, 0]}
     >
       <group {...props} dispose={null}>
@@ -49,4 +49,4 @@ export function Tower(props) {
   );
 }
 
-useGLTF.preload("/Kula1.glb");
+useGLTF.preload("/tower/Kula1.glb");

@@ -7,12 +7,13 @@ export function Gate(props) {
   return (
     <RigidBody
       mass={100}
-	  colliders='cuboid'
+      colliders="cuboid"
       enabledRotations={[false, false, false]}
-	  type='fixed'
-	  position={[-30, 18.5, 31.5]} rotation={[0,Math.PI/2.2,0]}
+      type="fixed"
+      position={[-30, 18.5, 31]}
+      rotation={[0, Math.PI / 2.2, 0]}
     >
-      <group {...props} dispose={null} scale={[1, 1, 1]} >
+      <group {...props} dispose={null} scale={[1, 1, 1]}>
         <mesh
           castShadow
           receiveShadow
@@ -60,4 +61,4 @@ export function Gate(props) {
   );
 }
 
-useGLTF.preload("/Kapija.glb");
+useGLTF.preload("/tower/Kapija.glb");

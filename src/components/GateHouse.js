@@ -41,4 +41,4 @@ export function GateHouse(props) {
   );
 }
 
-useGLTF.preload("/Kuca_uz_kapiju.glb");
+useGLTF.preload("/tower/Kuca_uz_kapiju.glb");

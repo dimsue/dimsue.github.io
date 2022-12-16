@@ -2,9 +2,9 @@ import * as THREE from "three"
 import { useThree, useFrame } from "@react-three/fiber"
 import { CapsuleCollider, RigidBody } from "@react-three/rapier"
 import { usePlayerControls } from "../utils/helpers"
-import { useStore } from "../store"
 import { PointerLockControls } from "@react-three/drei"
 import { useRef } from "react"
+import { useStore } from "../store"
 
 const SPEED = 4
 const direction = new THREE.Vector3()
@@ -12,8 +12,8 @@ const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
 
 const Player = ({ position, playerRef }) => {
-  const { camera } = useThree()
-  const storeState = useStore();
+  const { camera } = useThree();
+  const store = useStore();
   const controls = useRef();
   const { forward, backward, left, right } = usePlayerControls();
   useFrame(() => {
@@ -35,7 +35,7 @@ const Player = ({ position, playerRef }) => {
         <CapsuleCollider args={[0.5, 0.5]} />
         <meshBasicMaterial color='red' />
       </RigidBody>
-      <PointerLockControls ref={controls} enabled={!storeState.model}/>
+      <PointerLockControls ref={controls} enabled={!store.model}/>
     </>
   )
 }

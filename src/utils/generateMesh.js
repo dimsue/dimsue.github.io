@@ -12,7 +12,7 @@ export function makeScene(elem) {
   camera.lookAt(0, 0, 0);
   scene.add(camera);
   const controls = new TrackballControls(camera, elem);
-  controls.minDistance = 2;
+  controls.minDistance = 1.5;
   controls.maxDistance = 4;
   controls.noPan = true;
 

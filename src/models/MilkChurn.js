@@ -1,9 +1,8 @@
 import React from "react";
 import { useGLTF } from "@react-three/drei";
 
-export function MilkChurn({ hovered = false }) {
+export function MilkChurn() {
   const { nodes, materials } = useGLTF("/props/Rusty_Milk_Churn.glb");
-  console.log(hovered)
   return (
     <group dispose={null}
 	scale={0.03}>

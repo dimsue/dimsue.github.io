@@ -1,16 +1,11 @@
 import { useThree } from "@react-three/fiber";
-import { useRef } from "react";
 import * as THREE from "three";
-import { TrackballControls } from "three-stdlib";
-import { useStore } from "../store";
-import { generateMesh, makeScene } from "../utils/generateMesh";
-import { MilkChurn } from "../models/MilkChurn";
+import { generateMesh } from "../utils/generateMesh";
 import { useGLTF } from "@react-three/drei";
 
-const SetupScene = () => {
+const SetupScene = ({ name }) => {
   const { gl: renderer } = useThree();
   const elem = document.getElementById("item-holder");
-  const { name } = useStore();
 
   const sceneElements = [];
   function addScene(elem, fn) {
@@ -19,6 +14,15 @@ const SetupScene = () => {
 
   const { nodes: churnNodes, materials: churnMaterials } = useGLTF(
     "/props/Rusty_Milk_Churn.glb"
+  );
+  const { nodes: crateNodes, materials: crateMaterials } = useGLTF(
+    "/props/Wooden_Crate.glb"
+  );
+  const { nodes: jugNodes, materials: jugMaterials } = useGLTF(
+    "/props/Clay_Jug.glb"
+  );
+  const { nodes: lampNodes, materials: lampMaterials } = useGLTF(
+    "/props/Oil_Lamp.glb"
   );
 
   const sceneInitFunctionsByName = {
@@ -31,6 +35,33 @@ const SetupScene = () => {
         renderer,
         churnNodes.Rusty_Metal_Milk_Churn_LOD0_ukoschvbw.geometry,
         churnMaterials.Rusty_Metal_Milk_Churn_ukoschvbw_inst,
+        new THREE.Vector3(0.02, 0.02, 0.02),
+        new THREE.Vector3(0, -0.5, 0)
+      ),
+    jug: () =>
+      generateMesh(
+        elem,
+        renderer,
+        jugNodes.Large_Clay_Jug_LOD6_udtheeava.geometry,
+        jugMaterials.Large_Clay_Jug_udtheeava_01_inst,
+        new THREE.Vector3(0.03, 0.03, 0.03),
+        new THREE.Vector3(0, 0, 0)
+      ),
+    lamp: () =>
+      generateMesh(
+        elem,
+        renderer,
+        lampNodes.Vintage_Oil_Lamp_LOD6_ubpmajghw.geometry,
+        lampMaterials.Vintage_Oil_Lamp_ubpmajghw_00_inst,
+        new THREE.Vector3(0.05, 0.05, 0.05),
+        new THREE.Vector3(0, 0, 0)
+      ),
+    crate: () =>
+      generateMesh(
+        elem,
+        renderer,
+        crateNodes.Wooden_Crate_LOD1_vijncb3.geometry,
+        crateMaterials.Wooden_Crate_vijncb3_inst,
         new THREE.Vector3(0.02, 0.02, 0.02),
         new THREE.Vector3(0, -0.5, 0)
       ),

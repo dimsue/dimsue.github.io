@@ -286,6 +286,7 @@ export function SGrad(props) {
         enabledRotations={[false, false, false]}
       >
         <mesh
+          receiveShadow
           geometry={nodes.Plane001.geometry}
           material={materials["Material.001"]}
           position={[0, -0.022, 0]}
@@ -296,4 +297,4 @@ export function SGrad(props) {
   );
 }
 
-useGLTF.preload("/sgrad_better.glb");
+useGLTF.preload("/tower/sgrad_better.glb");

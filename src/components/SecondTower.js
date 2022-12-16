@@ -47,4 +47,4 @@ export function SecondTower(props) {
   );
 }
 
-useGLTF.preload("/Kula2.glb");
+useGLTF.preload("/tower/Kula2.glb");

@@ -1,37 +1,43 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useCursor } from "@react-three/drei";
-import { useStore } from "../store";
 import { MilkChurn } from "../models/MilkChurn";
 import { RigidBody } from "@react-three/rapier";
-import SphereModel from '../models/SphereModel';
+import SphereModel from "../models/SphereModel";
+import { WoodenCrate } from "../models/WoodenCrate";
+import { OilLamp } from "../models/OilLamp";
+import { ClayJug } from "../models/ClayJug";
+import { useStore } from "../store";
 
-const Model = ({
-  name,
-  position,
-  modelDisplayName,
-}) => {
-  const state = useStore();
+const Model = ({ name, position, modelDisplayName }) => {
   const modelRef = useRef();
+  const store = useStore();
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);
 
-  const handlePickUpItem = (e) => {
+  const handleModelFocused = (e) => {
     e.stopPropagation();
     setHovered(true);
   };
 
+  const handleModelNotFocused = (e) => {
+    setHovered(false);
+  };
+
   const renderModel = {
-    sphere: <SphereModel hovered={hovered}/>,
-    churn: <MilkChurn hovered={hovered}/>,
+    sphere: <SphereModel hovered={hovered} />,
+    churn: <MilkChurn hovered={hovered} />,
+    crate: <WoodenCrate hovered={hovered} />,
+    lamp: <OilLamp hovered={hovered} />,
+    jug: <ClayJug hovered={hovered} />,
   };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "e" && hovered && !state.model) {
+      if (e.key === "e" && hovered && !store.model) {
         useStore.setState({ model: modelRef, name, modelDisplayName });
         document.exitPointerLock();
-      } else if (e.key === "e" && state.model) {
-        useStore.setState({ model: null, name: "" });
+      } else if (e.key === "e" && store.model) {
+        useStore.setState({ model: null, name: "", modelDisplayName: "" });
         setHovered(false);
       }
     };
@@ -41,17 +47,31 @@ const Model = ({
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [hovered, state.model, modelRef, name, modelDisplayName]);
+  }, [hovered, modelRef, name, modelDisplayName]);
 
   return (
     <mesh
-      onPointerOut={() => setHovered(false)}
-      onPointerOver={(e) => handlePickUpItem(e)}
+      onPointerOut={(e) => handleModelNotFocused(e)}
+      onPointerOver={(e) => handleModelFocused(e)}
       dispose={null}
     >
-        <RigidBody colliders="cuboid" position={position} ref={modelRef}>
-          {renderModel[name]}
-        </RigidBody>
+      <RigidBody
+        colliders="cuboid"
+        type="fixed"
+        position={position}
+        ref={modelRef}
+      >
+        {renderModel[name]}
+      </RigidBody>
+      {hovered && (
+        <spotLight
+          position={position}
+          intensity={10}
+          distance={1}
+          angle={Math.PI / 1}
+          color="red"
+        />
+      )}
     </mesh>
   );
 };
